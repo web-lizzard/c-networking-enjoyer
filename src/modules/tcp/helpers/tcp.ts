@@ -2,7 +2,7 @@ import type { TcpSegment, TcpSegmentOverrides } from "../types";
 
 const RECEIVER_PORT = 2137
 
-function getRandomInt(max: number) {
+export function getRandomInt(max: number) {
     return Math.floor(Math.random() * (max + 1))
 }
 
@@ -15,7 +15,7 @@ export function createTcpSegment(overrides: Partial<TcpSegmentOverrides> = {}): 
     const defaultSegment = {
       sourcePort: RECEIVER_PORT,
       destinationPort: 80,
-      sequenceNumber: getRandomInt(1000),
+      sequenceNumber: overrides.sequenceNumber || getRandomInt(1000),
       dataOffset: 5,
       flags: {
         urg: false,
